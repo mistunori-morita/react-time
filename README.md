@@ -406,3 +406,28 @@ export default Clock;
 
 
 ```
+
+### propsについて
+- 親コンポーネントからpropsを渡す
+
+```js
+
+<Clock
+  dedline={this.state.dedline}/>
+
+
+//Clock.jsx
+constructor(props) {
+  super(props);
+  this.state = {
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  }
+  //これで見るとthis.propsの中身がみれる
+  console.log('this.props', this.props)
+}
+
+
+```
