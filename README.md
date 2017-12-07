@@ -26,3 +26,44 @@
 }
 
 ```
+### src/全削除からのindex.jsを追加
+- src/を一新して新しくindex.jsを作成
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+
+ReactDOM.render(
+  <div>CountDown champ</div>,document.getElementById('root')
+);
+
+これで表示されて入ればおk
+```
+
+## src/App.jsxを追加
+- Componentを作成して表示
+```js
+import React, { Component }from 'react';
+
+class App extends Component {
+  render(){
+    return (
+      <div>Countdown champ, App Compmonent</div>
+    )
+  }
+}
+
+export default App;
+```
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+
+ReactDOM.render(
+  <App></App>, //この箇所をcomponentに書き換える
+  document.getElementById('root')
+);
+※書き換えて表示がうまく行かない場合はビルドし直す（npm start）
+```
