@@ -23,7 +23,7 @@ class Clock extends Component {
 
 
   leading0(num) {
-    return num < 10 ? '0' + num : 10;
+    return num < 10 ? '0' + num : num;
   }
 
   getTimeUntil(dedline) {
