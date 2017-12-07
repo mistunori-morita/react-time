@@ -483,7 +483,7 @@ class Clock extends Component {
       seconds: 0
     }
   }
-
+  //ライフサイクル部分
   componentWillMount() {
     this.getTimeUntil(this.props.dedline);
   }
@@ -519,5 +519,80 @@ class Clock extends Component {
     )
   }
 }
+
+```
+
+
+### 三項演算子を使って時間の部分の表示修正
+```js
+
+leading0(num) {
+  return num < 10 ? '0' + num : 10;
+}
+
+
+<div>
+  <div className="Clock-days">{this.leading0(this.state.days)} Days</div>
+  <div className="Clock-hours">{this.leading0(this.state.hours)}  hours</div>
+  <div className="Clock-minutes">{this.leading0(this.state.minutes)}  minutes</div>
+  <div className="Clock-seconds">{this.leading0(this.state.seconds)}  seconds</div>
+</div>
+
+```
+
+### ブートストラップを使ってスタイリング
+- `npm install react-bootstrap --save
+- public/index.html `<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">`に貼り付け
+- App.jsxにインポートする`import { Form, FormControl, Button } from './react-bootstrap';`
+
+```js
+
+import React, { Component }from 'react';
+import './App.css';
+import Clock from './Clock';
+
+//インポート
+import { Form, FormControl, Button } from 'react-bootstrap';
+
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      dedline: 'December 25, 2017',
+      newDedline: ''
+    }
+  }
+
+  changeDEadline() {
+    console.log('state', this.state);
+    this.setState({
+      dedline: this.state.newDedline
+    });
+  }
+
+
+
+  render(){
+    return (
+      <div className="App">
+        <div>CountDown to {this.state.dedline}</div>
+        <Clock
+          dedline={this.state.dedline}/>
+        //react-bottostrapのコンポーネントに置き換える
+        <Form inline={true}>
+        <FormControl
+           className="Deadline-input"
+           placeholder="new data"
+           onChange={event => this.setState({newDedline: event.target.value})}/>
+          <Button onClick={() => this.changeDEadline()}>submit</Button>
+        </Form>
+      </div>
+    )
+  }
+}
+
+export default App;
+
 
 ```
