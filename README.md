@@ -281,3 +281,42 @@ class App extends Component {
 export default App;
 
 ```
+### onChangeについて
+- `onChange={event => console.log('event', event.target.value)}`を使うとコンソールがみれる
+-　これをもとにonChangeイベントでstateを更新
+
+```js
+
+constructor(props){
+  super(props);
+  this.state = {
+    dedline: 'December 25, 2017',
+    newDedline: '' //追記
+  }
+}
+
+//この状態でまずみると、consoleに変化したstateを表示させれる
+changeDEadline() {
+  console.log('state', this.state);
+}
+
+//jsx
+<div>
+  <input placeholder="new data" onChange={event => this.setState({newDedline: event.target.value})}/>
+  <button onClick={() => this.changeDEadline()}>submit</button>
+</div>
+
+```
+
+```js
+//changeDEadline()を修正
+changeDEadline() {
+  console.log('state', this.state);
+
+  //新しくsetStateで更新する値を決める,コンソールでみたように、newDedlineには入力したものが入ってくるのでそれをdedlineの”キー”＋"値"としてthis.state.newDedlineにすると状態が更新される
+  this.setState({
+    dedline: this.state.newDedline
+  });
+}
+
+```
