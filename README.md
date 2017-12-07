@@ -320,3 +320,89 @@ changeDEadline() {
 }
 
 ```
+
+### timeComponentの作成
+- App.jsxの修正
+- Clock.jsxの作成
+
+```js
+//App.jsx
+
+import React, { Component }from 'react';
+import './App.css';
+import Clock from './Clock'; //作成したClock.jsxコンポーネントを読み込み
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      dedline: 'December 25, 2017',
+      newDedline: ''
+    }
+  }
+
+  changeDEadline() {
+    console.log('state', this.state);
+    this.setState({
+      dedline: this.state.newDedline
+    });
+  }
+
+
+
+  render(){
+    return (
+      <div className="App">
+        <div>CountDown to {this.state.dedline}</div>
+        <Clock /> //ここにコンポーネントを読み込み
+        <div>
+          <input placeholder="new data" onChange={event => this.setState({newDedline: event.target.value})}/>
+          <button onClick={() => this.changeDEadline()}>submit</button>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default App;
+
+
+```
+
+```js
+//Clock.jsx
+
+import React, { Component } from 'react';
+import './App.css';
+
+
+class Clock extends Component {
+  //最初に必要な状態(state)を準備しておく
+  constructor(props) {
+    super(props);
+    this.state = {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    }
+  }
+
+  render() {
+    return (
+      <div>
+      //this.state.xxx（constrctorで設定したstateにアクセスして初期値を表示させれる）
+        <div className="Clock-days">{this.state.days} Days</div>
+        <div className="Clock-hours">{this.state.hours}  hours</div>
+        <div className="Clock-minutes">{this.state.minutes}  minutes</div>
+        <div className="Clock-seconds">{this.state.seconds}  seconds</div>
+      </div>
+    )
+  }
+}
+
+
+export default Clock;
+
+
+```
