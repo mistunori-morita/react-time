@@ -67,3 +67,133 @@ ReactDOM.render(
 );
 ※書き換えて表示がうまく行かない場合はビルドし直す（npm start）
 ```
+
+
+### index.js修正
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+
+ReactDOM.render(
+  <App/>,
+  document.getElementById('root')
+);
+
+最初は<App></App>でも表示できるということを知るための設定
+実際にはこちらを使う
+```
+
+### App.jsxを作り込む
+```js
+import React, { Component }from 'react';
+
+class App extends Component {
+  render(){
+    return (
+      <div>
+        <div>CountDown to December 25, 2017</div>
+        <div>
+          <div>14 Days</div>
+          <div>30 hours</div>
+          <div>15 mintes</div>
+          <div>20 seconds</div>
+        </div>
+        <div>
+          <input placeholder="new data"/>
+          <button>submit</button>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default App;
+
+```
+
+- src/App.cssを作成
+```css
+.App{
+  text-align: center;
+  font-style: 35px;
+  margin-top: 20%;
+}
+
+```
+- 作成したApp.cssをimportする
+```js
+
+import React, { Component }from 'react';
+import './App.css'; //ここでimport
+
+class App extends Component {
+  render(){
+    return (
+      <div className="App"> //classNameを使って適用させる
+        <div>CountDown to December 25, 2017</div>
+        <div>
+          <div>14 Days</div>
+          <div>30 hours</div>
+          <div>15 mintes</div>
+          <div>20 seconds</div>
+        </div>
+        <div>
+          <input placeholder="new data"/>
+          <button>submit</button>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default App;
+```
+- styleの追加
+```css
+.App{
+  text-align: center;
+  font-size: 35px;
+  margin-top: 20%;
+}
+
+.App-title{
+  font-size: 50px;
+}
+
+.Clock-days, .Clock-hours, .Clock-minutes, .Clock-seconds{
+  display: inline;
+  margin: 10px;
+}
+
+```
+
+- App.jsxの追記
+```js
+import React, { Component }from 'react';
+import './App.css';
+
+class App extends Component {
+  render(){
+    return (
+      <div className="App">
+        <div>CountDown to December 25, 2017</div>
+        <div className="App-title">
+          <div className="Clock-days">14 Days</div>
+          <div className="Clock-hours">30 hours</div>
+          <div className="Clock-minutes">15 minutes</div>
+          <div className="Clock-seconds">20 seconds</div>
+        </div>
+        <div>
+          <input placeholder="new data"/>
+          <button>submit</button>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default App;
+
+```
