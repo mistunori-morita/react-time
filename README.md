@@ -431,3 +431,41 @@ constructor(props) {
 
 
 ```
+
+### Dateを使って時間を取得
+- getTimeUntilの関数を使ってsetStateをする
+```js
+getTimeUntil(dedline) {
+  //timeの変数に時間を代入※このままだと数字がただでるだけなので次で変換する
+  const time = Date.parse(dedline) - Date.parse(new Date());
+  console.log('time',time);
+
+  //書く時間をMath.floorを使って変換
+  const seconds = Math.floor((time/1000)% 60);
+  const minutes = Math.floor((time/1000/60)%60);
+  const hours = Math.floor(time/(1000*60*60) % 24);
+  const days = Math.floor(time/(1000*60*60*24));
+
+  //書く時間が取得できているかコンソールで表示　constrctorで状態をセットしたので、その中にconstで宣言した各値を代入している
+  console.log('seconds',seconds,'minutes',minutes,'hours', hours,'days',days);
+
+  //この状態だとsetStateで無限ループになるので落ちるので次で修正
+  this.setState({
+    days: days
+  });
+}
+
+render() {
+  //関数の呼び出し
+  this.getTimeUntil(this.props.dedline)
+  return (
+    <div>
+      <div className="Clock-days">{this.state.days} Days</div>
+      <div className="Clock-hours">{this.state.hours}  hours</div>
+      <div className="Clock-minutes">{this.state.minutes}  minutes</div>
+      <div className="Clock-seconds">{this.state.seconds}  seconds</div>
+    </div>
+  )
+}
+
+```
